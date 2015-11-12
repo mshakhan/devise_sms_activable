@@ -16,7 +16,7 @@ module Devise
     #     use this to let your user access some features of your application without
     #     confirming the account, but blocking it after a certain period (ie 7 days).
     #     By default confirm_within is 0 days, so the user must confirm before entering.
-    #     If you want to allow user to use parts of the site and block others override 
+    #     If you want to allow user to use parts of the site and block others override
     #     sms_confirmation_required? and check manually on selected pages using the
     #     require_sms_activated! helper or sms_confirmed? property on record
     #
@@ -30,8 +30,8 @@ module Devise
       extend ActiveSupport::Concern
 
       included do
-        before_create :generate_sms_token, :if => :sms_confirmation_required?
-        after_create  :resend_sms_token, :if => :sms_confirmation_required?
+        before_save :generate_sms_token, :if => :sms_confirmation_required?
+        after_save  :resend_sms_token, :if => :sms_confirmation_required?
       end
 
       # Confirm a user by setting it's sms_confirmed_at to actual time. If the user
