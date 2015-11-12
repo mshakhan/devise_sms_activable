@@ -30,7 +30,6 @@ module Devise
       extend ActiveSupport::Concern
 
       included do
-        before_save :generate_sms_token, :if => :sms_confirmation_required?
         after_save  :resend_sms_token, :if => :sms_confirmation_required?
       end
 
